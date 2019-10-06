@@ -3,7 +3,15 @@
 
 /*
  * Copyright (C) 2016 Red Hat Inc.
+ *
+ * Author: J. Eric Ivancich <ivancich@redhat.com>
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version
+ * 2.1, as published by the Free Software Foundation.  See file
+ * COPYING.
  */
+
 
 #include <iostream>
 #include <memory>
@@ -20,7 +28,7 @@ struct Elem {
   crimson::IndIntruHeapData heap_data;
   crimson::IndIntruHeapData heap_data_alt;
 
-  Elem(int _data) : data(_data) { }
+  explicit Elem(int _data) : data(_data) { }
 
   bool operator==(const Elem& other) {
     return data == other.data;
@@ -655,7 +663,7 @@ TEST_F(HeapFixture1, shared_data) {
 
 TEST_F(HeapFixture1, iterator_basics) {
   {
-    uint count = 0;
+    unsigned count = 0;
     for(auto i = heap.begin(); i != heap.end(); ++i) {
       ++count;
     }
@@ -700,7 +708,7 @@ TEST_F(HeapFixture1, const_iterator_basics) {
   const auto& cheap = heap;
 
   {
-    uint count = 0;
+    unsigned count = 0;
     for(auto i = cheap.cbegin(); i != cheap.cend(); ++i) {
       ++count;
     }
